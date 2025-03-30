@@ -26,8 +26,28 @@ def read_xls_codelist(file, filename_metadata=True, sheets=None):
             raise ValueError(f"Naslovne vrstice ni bilo mogoče najti na listu {sheet}.")
 
 
+read_xls_codelist("/Users/nejcb/WD/Sifranti_Cistopis_objava_11_2025 (1).xlsx", sheets=["Š 6"])
 
 
+
+
+def extract_metadata_from_filename(filename):
+    """
+    Extract year and month metadata from the filename.
+    Assumes the filename contains the pattern '_MM_YYYY'.
+    """
+    pattern = r'_([0-9]{2})_([0-9]{4})'
+    match = re.search(pattern, filename)
+    if match:
+        month, year = match.groups()
+        return int(year), int(month)
+    else:
+        raise ValueError("Filename does not contain valid year and month metadata.")
+
+# Example usage
+filename = "Sifranti_Cistopis_objava_11_2025 (1).xlsx"
+year, month = extract_metadata_from_filename(filename)
+print(f"Year: {year}, Month: {month}")
 
 
 
